@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tech Treasure Hunt</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Courier New", monospace;
+      background:
+        linear-gradient(transparent 95%, rgba(0,255,255,0.08) 95%),
+        linear-gradient(90deg, transparent 95%, rgba(0,255,255,0.08) 95%),
+        radial-gradient(circle at top, #0f2027, #000000);
+      background-size: 40px 40px, 40px 40px, cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #00ffe1;
+    }
+
+    .container {
+      width: 92%;
+      max-width: 500px;
+      background: rgba(0, 0, 0, 0.75);
+      padding: 32px;
+      border-radius: 14px;
+      text-align: center;
+      border: 1px solid rgba(0, 255, 225, 0.4);
+      box-shadow: 
+        0 0 25px rgba(0, 255, 225, 0.3),
+        inset 0 0 15px rgba(0, 255, 225, 0.1);
+    }
+
+    h2 {
+      color: #00ffe1;
+      margin-bottom: 18px;
+      font-size: 28px;
+      letter-spacing: 1px;
+      text-shadow: 0 0 10px rgba(0, 255, 225, 0.8);
+    }
+
+    #question {
+      font-size: 18px;
+      margin-bottom: 22px;
+      line-height: 1.5;
+    }
+
+    input {
+      width: 82%;
+      padding: 11px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #00ffe1;
+      background: #020a0d;
+      color: #00ffe1;
+      outline: none;
+      font-family: "Courier New", monospace;
+    }
+
+    input::placeholder {
+      color: rgba(0, 255, 225, 0.6);
+    }
+
+    input:focus {
+      box-shadow: 0 0 12px rgba(0, 255, 225, 0.6);
+    }
+
+    button {
+      margin-top: 18px;
+      padding: 11px 28px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, #00ffe1, #00b3a4);
+      color: #001b1f;
+      font-weight: bold;
+      letter-spacing: 1px;
+      transition: 0.25s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 18px rgba(0, 255, 225, 0.9);
+    }
+
+    #result {
+      margin-top: 18px;
+      font-size: 18px;
+      min-height: 24px;
+      font-weight: bold;
+    }
+
+    #clue {
+      margin-top: 22px;
+      padding: 16px;
+      border-radius: 6px;
+      background: rgba(0, 255, 225, 0.1);
+      border: 1px dashed #00ffe1;
+      color: #00ffe1;
+      display: none;
+      font-size: 17px;
+      text-shadow: 0 0 6px rgba(0, 255, 225, 0.6);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h2>💻 Tech Treasure Hunt</h2>
+
+    <p id="question"></p>
+
+    <input type="text" id="answer" placeholder="Enter command...">
+    <br>
+    <button onclick="checkAnswer()">EXECUTE</button>
+
+    <p id="result"></p>
+
+    <div id="clue">🔓 NEXT CLUE: <span id="clueText"></span></div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        q: "Which actor has won the highest number of Kerala State Film Awards for Best Actor?",
+        a: "mammootty",
+        clue: "IT 218"
+      },
+      {
+        q: "What is the first Malayalam movie?",
+        a: "vigathakumaran",
+        clue: "IT 218"
+      },
+      {
+        q: "Who is known as the “Father of Indian Cinema”?",
+        a: "dadasaheb Phalke",
+        clue: "IT 218"
+      },
+      {
+        q: "Which director won the Best Director (Fiction) award at the Asian Academy Creative Awards?",
+        a: "basil joseph",
+        clue: "IT 218"
+      }
+    ];
+
+    const randomIndex = Math.floor(Math.random() * questions.length);
+    const currentQuestion = questions[randomIndex];
+
+    document.getElementById("question").innerText = currentQuestion.q;
+
+    function checkAnswer() {
+      const userAnswer = document.getElementById("answer").value
+        .trim()
+        .toLowerCase();
+
+      const result = document.getElementById("result");
+
+      if (userAnswer === currentQuestion.a) {
+        result.innerText = "✔️ ACCESS GRANTED";
+        result.style.color = "#00ff88";
+        document.getElementById("clueText").innerText = currentQuestion.clue;
+        document.getElementById("clue").style.display = "block";
+      }
+      else {
+        result.innerText = "✖ ACCESS DENIED";
+        result.style.color = "#ff4c4c";
+      }
+    }
+  </script>
+
+</body>
+</html>
